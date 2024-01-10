@@ -1,8 +1,8 @@
-# Graph Xplore
+# Graph Explore
 
 ## Introduction
 
-Graph Xplore is an analytics engine that allows businesses to find potential customers using data from only a small number of accounts from similar businesses. It is written in Python (using the Flask framework), and can be deployed to a Cloud server.
+Graph Explore is an analytics engine that allows businesses to find potential customers using data from only a small number of accounts from similar businesses. It is written in Python (using the Flask framework), and can be deployed to a Cloud server.
 
 ## Instructions
 
