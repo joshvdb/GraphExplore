@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+body {
+    background: linear-gradient(135deg, #000000, #6a0dad);
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .graphs { 
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    } 
+
+    .accounts { 
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    } 
+
+    .connection_type { 
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    } 
+
+    .analysis_type {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .graph_type { 
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    } 
+
+    .enter {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #45a29e;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .homepage {
+      width: 300px;
+      height: 40px;
+      margin: 5px;
+      background-color: #45a29e;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+  <div class="form-container">
+    <form method="POST" action="/">
+      <div class="title">Graph selection for analysis</div>
+      <select name="graphs" class="graphs">
+        <option value="{{graph_list_first}}" selected>{{graph_list_first}}</option>
+        {% for value in graph_list if value != graph_list_first %}
+          <option value="{{value}}">{{value}}</option>
+        {% endfor %}
+      </select>
+      <select name="accounts" class="accounts">
+        <option value="{{account_list_first}}" selected>{{account_list_first}}</option>
+        {% for value in account_list if value != account_list_first %}
+          <option value="{{value}}">{{value}}</option>
+        {% endfor %}
+      </select>
+      <select name="connection_type" class="connection_type">
+        <option value="followers" selected>Followers</option>
+          <option value="following">Following</option>
+      </select>
+      <select name="analysis_type" class="analysis_type">
+        <option value="common" selected>Common</option>
+          <option value="unique">Unique</option>
+      </select>
+      <select name="graph_type" class="graph_type">
+        <option value="3" selected>Minimum/Spectral (reduce clutter)</option>
+          <option value="2">Spring</option>
+          <option value="1">Circular</option>
+      </select>
+      <button formaction="{{ url_for('analyze') }}" class="enter" type="submit">Analyze</button>
+    </form>
+    <form method="POST" action="/home">
+      <button class="homepage" type="submit">Homepage</button>
+    </form>
+  </div>
+</body>
+</html>
+

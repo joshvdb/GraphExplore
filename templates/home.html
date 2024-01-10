@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Box Example</title>
+    <style>
+
+    .connection_type { 
+    top:1%;
+    left:1%;
+    width:10%;
+    height: 10%;
+    position: absolute; 
+    z-index: 1;
+    background: white; 
+    } 
+
+    .analysis_type {
+    top:14%;
+    left:1%;
+    width:10%;
+    height:10%;
+    position: absolute;
+    z-index: 2;
+    color: black;
+    background: white; 
+    }
+
+    .text { 
+    top:1%;
+    left:15%;
+    width:50%;
+    height: 10%;
+    position: absolute; 
+    z-index: 1;
+    background: white; 
+    } 
+
+    .enter {
+    top:14%;
+    left:15%;
+    width:10%;
+    height:10%;
+    position: absolute;
+    z-index: 2;
+    color: black;
+    background: cyan; 
+    }
+
+    .account_name_1 {
+    top:28%;
+    left:1%;
+    width:10%;
+    height:10%;
+    position: absolute;
+    z-index: 2;
+    color: black;
+    background: white; 
+    }
+
+    .account_followers { 
+    top:40%;
+    left:1%;
+    width:50%;
+    height: 10%;
+    position: absolute; 
+    z-index: 1;
+    background: white; 
+    } 
+
+    .account_following {
+    top:52%;
+    left:1%;
+    width:10%;
+    height:10%;
+    position: absolute;
+    z-index: 2;
+    color: black;
+    background: white; 
+    }
+
+    .add_accounts { 
+    top:64%;
+    left:1%;
+    width:50%;
+    height: 10%;
+    position: absolute; 
+    z-index: 1;
+    background: white; 
+    } 
+
+    .account_name_2 {
+    top:76%;
+    left:1%;
+    width:10%;
+    height:10%;
+    position: absolute;
+    z-index: 2;
+    color: black;
+    background: white; 
+    }
+
+    .linked_accounts { 
+    top:88%;
+    left:1%;
+    width:40%;
+    height: 10%;
+    position: absolute; 
+    z-index: 1;
+    background: white; 
+    } 
+
+    .enter_1 {
+    top:88%;
+    left:80%;
+    width:10%;
+    height:10%;
+    position: absolute;
+    z-index: 2;
+    color: black;
+    background: white; 
+    }
+
+    </style>
+</head>
+<body>
+    <form method="POST" action="/">
+    <fieldset class="connection_type">
+        <legend>Connection Type</legend>
+        <div>
+          <input type="radio" id="followers" name="followers" value="followers"
+                 checked>
+          <label for="followers">Followers</label>
+        </div>
+        <div>
+          <input type="radio" id="following" name="following" value="following">
+          <label for="following">Following</label>
+        </div>
+    </fieldset>
+    <fieldset class="analysis_type">
+        <legend>Analysis Type</legend>
+        <div>
+          <input type="radio" id="most_common" name="most_common" value="most_common"
+                 checked>
+          <label for="most_common">Most Common</label>
+        </div>
+        <div>
+            <input type="radio" id="least_common" name="least_common" value="least_common"
+                   checked>
+            <label for="most_common">Least Common</label>
+          </div>
+    </fieldset>
+    
+        <input class="text"  style="width:70%" type="text" name="text" placeholder="Enter Accounts">
+        <button class="enter" type="submit">Analyze</button>
+    </form>
+    <form method="GET" action="/">
+        <input class="account_name_1"  style="width:70%" type="text" name="account_name_1" placeholder="Enter Account Name">
+        <input class="account_followers"  style="width:70%" type="text" name="account_followers" placeholder="Followers">
+        <input class="account_following"  style="width:70%" type="text" name="account_following" placeholder="Following">
+    </form>
+    <form method="POST" action="/">
+        <fieldset class="add_accounts">
+            <legend>Connection Type</legend>
+            <div>
+              <input type="radio" id="add_followers" name="add_followers" value="add_followers"
+                     checked>
+              <label for="add_followers">Followers</label>
+            </div>
+            <div>
+              <input type="radio" id="add_following" name="add_following" value="add_following">
+              <label for="add_following">Following</label>
+            </div>
+        </fieldset>
+        <input class="account_name_2"  style="width:70%" type="text" name="account_name_2" placeholder="Account Name">
+        <input class="linked_accounts"  style="width:70%" type="text" name="linked_accounts" placeholder="Linked Accounts">
+        <button class="enter_1" type="submit">Submit</button>
+    </form>
+</body>
+</html>

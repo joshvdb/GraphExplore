@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Box Example</title>
+    <style>
+        body {
+            background-color: #1f2833;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            width: 400px;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 10px;
+            padding: 5px;
+            background-color: #0b0c10;
+            border: none;
+            color: #fff;
+        }
+
+        .input-field::placeholder {
+            color: #66fcf1;
+        }
+
+        .submit-button {
+            width: 100%;
+            height: 40px;
+            background-color: #45a29e;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #328b88;
+        }
+
+        .explore-button {
+            width: 100%;
+            height: 40px;
+            background-color: #45a29e;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .explore-button:hover {
+            background-color: #328b88;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form method="POST" action="/">
+            <select name="account_name_1" class="input-field">
+                <option value="{{account_list_first}}" selected>{{account_list_first}}</option>
+                {% for value in account_list if value != account_list_first %}
+                <option value="{{value}}">{{value}}</option>
+                {% endfor %}
+            </select>
+            <button formaction="{{ url_for('get_account_details') }}" class="submit-button" type="submit">Get Account Details</button>
+            <input class="input-field" value="{{ followers }}" type="text" name="account_followers" placeholder="Followers">
+            <input class="input-field" value="{{ following }}" type="text" name="account_following" placeholder="Following">
+        </form>
+        
+        <form method="POST" action="/add_account">
+            <input class="input-field" type="text" name="account_name_2" placeholder="Account Name">
+            <input class="input-field" type="text" name="follower_accounts" placeholder="Follower Accounts">
+            <input class="input-field" type="text" name="following_accounts" placeholder="Following Accounts">
+            <button class="submit-button" type="submit">Submit</button>
+        </form>
+        
+        <form method="POST" action="/explore">
+            <button class="explore-button" type="submit">Explore</button>
+        </form>
+    </div>
+</body>
+</html>

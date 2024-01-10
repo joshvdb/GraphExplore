@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+  body {
+    background: linear-gradient(135deg, #000000, #6a0dad);
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .form-container {
+        width: 400px;
+        text-align: center;
+    }
+
+    .form-title {
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form-description {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .graph_name {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+    }
+
+    .account_name_1 {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+    }
+
+    .get_account_details {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #45a29e;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .delete_graph {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #ff0000;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .delete_account {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #ff5500;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .graph_name_2 {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+    }
+
+    .account_followers { 
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    } 
+
+    .account_following {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .account_name_2 {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .follower_accounts { 
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .following_accounts { 
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #0b0c10;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .enter_1 {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #45a29e;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .explore {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #45a29e;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .upload {
+      width: 100%;
+      height: 40px;
+      margin: 5px;
+      background-color: #45a29e;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+  <div class="form-container">
+    <form method="POST" action="/">
+      <div class="form-title">Social Media Accounts</div>
+      <div class="form-description">Main page - add account details here.</div>
+      <select name="graph_name" class="graph_name">
+        <option value="{{graph_list_first}}" selected>{{graph_list_first}}</option>
+        {% for value in graph_list if value != graph_list_first %}
+          <option value="{{value}}">{{value}}</option>
+        {% endfor %}
+      </select>
+        <select name="account_name_1" class="account_name_1">
+          <option value="{{account_list_first}}" selected>{{account_list_first}}</option>
+          {% for value in account_list if value != account_list_first %}
+            <option value="{{value}}">{{value}}</option>
+          {% endfor %}
+        </select>
+          <button formaction="{{ url_for('get_account_details') }}" class="get_account_details" type="submit">Get Account Details</button>
+          <button formaction="{{ url_for('delete_graph') }}" class="delete_graph" type="submit">Delete Graph</button>
+          <button formaction="{{ url_for('delete_account') }}" class="delete_account" type="submit">Delete Account</button>
+          <input class="account_followers"  value="{{ followers }}" type="text" name="account_followers" placeholder="Followers">
+          <input class="account_following"  value="{{ following }}" type="text" name="account_following" placeholder="Following">
+    </form>
+        <form method="POST" action="/add_account">
+          <div class="add_new_account">Add New Account</div>
+          <input class="graph_name_2"  type="text" name="graph_name_2" placeholder="Graph Name">
+          <input class="account_name_2"  type="text" name="account_name_2" placeholder="Account Name">
+          <input class="follower_accounts"  type="text" name="follower_accounts" placeholder="Follower Accounts">
+          <input class="following_accounts"  type="text" name="following_accounts" placeholder="Following Accounts">
+          <button class="enter_1" type="submit">Add Account</button>
+        </form>
+      <form method="POST" action="/explore">
+        <button class="explore" type="submit">Explore</button>
+      </form>
+      <form method = "POST" enctype="multipart/form-data" action = "/upload">   
+        <input class="choose" type="file" name="file" accept=".csv" value="Choose File">
+        <input class="upload" type = "submit" value="Upload Account Data (csv format)"> 
+    </form>
+  </div>
+</body>
+</html>
