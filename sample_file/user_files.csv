@@ -1,0 +1,4 @@
+graph,user,followers,following
+graph,account1,"account1, account4, account5","account1, account4, account5"
+graph,account2,"account1, account4, account5","account1, account4, account5"
+graph,account3,"account1, account2, account3, account4, account5","account1, account2, account3, account4, account5"
