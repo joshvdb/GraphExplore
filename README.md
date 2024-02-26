@@ -8,9 +8,11 @@ Graph Explore is an analytics engine that allows businesses to find potential cu
 
 ### Overview
 
-
 This tool currently relies on users to import data from a given social network into it, through copy and paste operations, or the bulk upload from a csv file. The data must be in csv format. Note that if there are, for example, no accounts following a given account, the field can be left blank.
 
+### Execution
+
+Run app_script.py after downloading this project directory. This will deploy a Flask server, which can then be accessed at the specified url.
 
 ### User Input
 
