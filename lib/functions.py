@@ -1,11 +1,23 @@
 from bokeh.models import Range1d, Circle, MultiLine
 from bokeh.plotting import figure
 from bokeh.plotting import from_networkx
-import numpy as np
+from flask import Flask
+import numpy as _np
 import networkx as nx
 import sqlite3 as _sql
+import typing as _t
+import os as _os
+import sys as _sys
 
-def construct_account_graph(account_list, type='followers'):
+
+cwd = _os.getcwd()
+
+# Add the parent directory to sys.path
+_sys.path.append(cwd)
+
+from lib.constants import AccountAttributes, LinkTypes, GraphLayoutTypes
+
+def construct_account_graph(account_list: list, type: str=_t.Union[AccountAttributes.followers.value, AccountAttributes.following.value]) -> list:
     """
     Function to construct a list of account pairs that indicate a link between two accounts.
 
@@ -19,7 +31,7 @@ def construct_account_graph(account_list, type='followers'):
         return [(account.account_name, account_i) for account in account_list for account_i in account.following_accounts]
 
 
-def reduce_graph(graph, major_accounts, mode='common', threshold=1):
+def reduce_graph(graph: nx.Graph, major_accounts: list, mode: str=_t.Union[LinkTypes.common.value, LinkTypes.uncommon.value], threshold: int=1) -> list:
     """
     Function to remove accounts from the graph if their degree is higher/lower than a given threshold.
 
@@ -30,7 +42,7 @@ def reduce_graph(graph, major_accounts, mode='common', threshold=1):
     :return: list
     """
     all_names = [v for k, v in graph if v not in major_accounts]
-    all_names = np.unique(all_names, return_counts=True)
+    all_names = _np.unique(all_names, return_counts=True)
     frequency_count = list(zip(all_names[0], all_names[1]))
     
     if mode=='common':
@@ -40,7 +52,7 @@ def reduce_graph(graph, major_accounts, mode='common', threshold=1):
     
     return [(k, v) for k, v in graph if v in common_accounts]
 
-def return_account_page(app):
+def return_account_page(app: Flask) -> (list, list, list, list):
     """
     Function to read graph information from the database, and return it in function-readable format (lists).
 
@@ -52,7 +64,7 @@ def return_account_page(app):
     cursor = conn.execute("SELECT * from connections")
 
     results = [row for row in cursor]
-    graph_list = np.unique([row[0] for row in results])
+    graph_list = _np.unique([row[0] for row in results])
     account_list = [row[1] for row in results]
 
     if len(graph_list) > 0:
@@ -67,7 +79,7 @@ def return_account_page(app):
 
     return graph_list_first, graph_list, account_list_first, account_list
 
-def get_network_graph(graph, major_accounts, layout='1'):
+def get_network_graph(graph: nx.Graph, major_accounts: list, layout: _t.Union[GraphLayoutTypes.circular_layout.value, GraphLayoutTypes.spring_layout.value, GraphLayoutTypes.spectral_layout.value]=GraphLayoutTypes.spectral_layout.value) -> figure:
     """
     Function to read graph information from the database, and return it in function-readable format (lists).
 
@@ -76,11 +88,11 @@ def get_network_graph(graph, major_accounts, layout='1'):
     :param layout: str
     :return: plot
     """
-    if layout == '1':
+    if layout == 'circular_layout':
         layout_variable = nx.circular_layout
-    elif layout == '2':
+    elif layout == 'spring_layout':
         layout_variable = nx.spring_layout
-    elif layout == '3':
+    else:
         layout_variable = nx.spectral_layout
     
     color_scheme = ['red' if a in major_accounts else 'blue' for a in list(graph.nodes)]
@@ -118,7 +130,7 @@ def get_network_graph(graph, major_accounts, layout='1'):
     
     return plot
 
-def get_similar_accounts(following_graph, follower_graph, major_accounts, following_follower_ratio):
+def get_similar_accounts(following_graph: nx.Graph, follower_graph: nx.Graph, major_accounts: list, following_follower_ratio: float) -> list:
     """
     Function to read graph information from the database, and return it in function-readable format (lists).
 
@@ -135,7 +147,7 @@ def get_similar_accounts(following_graph, follower_graph, major_accounts, follow
     
     return sorted(values, key=lambda v: v[1], reverse=True)
 
-def get_edge_weights(graph, major_accounts):
+def get_edge_weights(graph: nx.Graph, major_accounts: list) -> list:
     """
     Function that returns a sorted list of (account, degree) pairs for use in graph analysis and similar account recommendation.
 
